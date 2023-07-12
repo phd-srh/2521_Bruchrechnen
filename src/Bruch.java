@@ -13,12 +13,27 @@ public class Bruch {
         return new Bruch(neuZähler, neuNenner).kürze();
     }
 
+    public Bruch sub(Bruch b) {
+        return add( b.negiere() );
+    }
+
+    public Bruch negiere() {
+        if (this.nenner < 0)
+            return new Bruch( this.zähler, -this.nenner );
+        else
+            return new Bruch( -this.zähler, this.nenner );
+    }
+
     public Bruch kürze() {
         long teiler = ggT(this.zähler, this.nenner);
         return new Bruch( this.zähler / teiler, this.nenner / teiler );
     }
 
     private long ggT(long a, long b) {
+        if (a == 0) return b;
+        if (b == 0) return a;
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
         while (a != b) {
             if (a > b) a -= b;
             else       b -= a;

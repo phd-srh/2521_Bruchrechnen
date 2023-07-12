@@ -6,11 +6,16 @@ public class Main {
 
         System.out.println("b1 = " + b1);
         System.out.println("b2 = " + b2);
+        System.out.println("b3 = " + b3);
 
         Bruch b1_plus_b2 = b1.add(b2); // muss man so schreiben, gemeint ist: b1 + b2
+        Bruch b1_minus_b2 = b1.sub(b2);
         System.out.println("b1 + b2 = " + b1_plus_b2);
+        System.out.println("b1 - b2 = " + b1_minus_b2);
 
         Bruch b2_plus_b3 = b2.add(b3);
+        Bruch b2_minus_b3 = b2.sub(b3);
         System.out.println("b2 + b3 = " + b2_plus_b3);
+        System.out.println("b2 - b3 = " + b2_minus_b3);
     }
 }
