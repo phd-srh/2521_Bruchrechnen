@@ -7,6 +7,7 @@ public class Bruch {
         this.nenner = nenner;
     }
 
+    // bruch_a .add( bruch_b ) => weil wir a + b, oder addiere(a, b)
     public Bruch add(Bruch b) {
         long neuNenner = this.nenner * b.nenner;
         long neuZähler = this.zähler * b.nenner + b.zähler * this.nenner;
@@ -15,6 +16,18 @@ public class Bruch {
 
     public Bruch sub(Bruch b) {
         return add( b.negiere() );
+    }
+
+    public Bruch mult(Bruch b) {
+        return new Bruch(this.zähler * b.zähler, this.nenner * b.nenner).kürze();
+    }
+
+    public Bruch div(Bruch b) {
+        return this.mult( b.kehrWert() );
+    }
+
+    public Bruch kehrWert() {
+        return new Bruch(this.nenner, this.zähler);
     }
 
     public Bruch negiere() {
@@ -27,6 +40,16 @@ public class Bruch {
     public Bruch kürze() {
         long teiler = ggT(this.zähler, this.nenner);
         return new Bruch( this.zähler / teiler, this.nenner / teiler );
+    }
+
+    public boolean isEqual(Bruch b) {
+        // Möglichkeit 1 - programmtechnische Lösung
+        Bruch this_gekürzt = this.kürze();
+        Bruch b_gekürzt = b.kürze();
+        return this_gekürzt.zähler == b_gekürzt.zähler && this_gekürzt.nenner == b_gekürzt.nenner;
+        // Möglichkeit 2 - mathematische Lösung
+//        Bruch quotient = this.div(b);
+//        return quotient.zähler == quotient.nenner;
     }
 
     private long ggT(long a, long b) {
