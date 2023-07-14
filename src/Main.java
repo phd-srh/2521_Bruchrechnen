@@ -1,36 +1,40 @@
 public class Main {
+    private static final int ANZAHL_TESTDURCHLÄUFE = 20_000;
 
     public static boolean sindDieBeidenDoubleNahezuGleich(double a, double b) {
         return Math.abs(a - b) < 0.0000001;
     }
 
     public static void main(String[] args) {
-        Bruch b1 = new Bruch(1, 2);
-        Bruch b2 = new Bruch(1, 3);
-        Bruch b3 = new Bruch(2, 3);
-        Bruch b4 = new Bruch(7, 14);
+        int anzahlPositiverTests = 0;
+        for (int i=0; i<ANZAHL_TESTDURCHLÄUFE; i++) {
+            int[] werte = new int[4];
+            for (int j=0; j< werte.length; j++)
+                werte[j] = (int)(Integer.MAX_VALUE*Math.random());
+            anzahlPositiverTests += testBruchKalkulation(werte);
+        }
+        System.out.println(anzahlPositiverTests + "/" +
+                (ANZAHL_TESTDURCHLÄUFE*5) + " waren erfolgreich");
+    }
 
-        //int x = (int)(Integer.MAX_VALUE * Math.random());
+    private static int testBruchKalkulation(int[] werte) {
+        int anzahlPositiverTests = 0;
+        Bruch a = new Bruch(werte[0], werte[1]);
+        Bruch b = new Bruch(werte[2], werte[3]);
 
-        System.out.println("b1 = " + b1);
-        System.out.println("b2 = " + b2);
-        System.out.println("b3 = " + b3);
+        if ( sindDieBeidenDoubleNahezuGleich( a.add(b).toDouble(),
+                a.toDouble() + b.toDouble() )) anzahlPositiverTests++;
+        if ( sindDieBeidenDoubleNahezuGleich( a.sub(b).toDouble(),
+                a.toDouble() - b.toDouble() )) anzahlPositiverTests++;
+        if ( sindDieBeidenDoubleNahezuGleich( a.mult(b).toDouble(),
+                a.toDouble() * b.toDouble() )) anzahlPositiverTests++;
+        if ( sindDieBeidenDoubleNahezuGleich( a.div(b).toDouble(),
+                a.toDouble() / b.toDouble() )) anzahlPositiverTests++;
 
-        Bruch b1_plus_b2 = b1.add(b2); // muss man so schreiben, gemeint ist: b1 + b2
-        Bruch b1_minus_b2 = b1.sub(b2);
-        Bruch b1_mal_b2 = b1.mult(b2);
-        Bruch b1_div_b2 = b1.div(b2);
-        System.out.println("b1 + b2 = " + b1_plus_b2);
-        System.out.println(sindDieBeidenDoubleNahezuGleich(b1.toDouble() + b2.toDouble(), b1_plus_b2.toDouble()));
-        System.out.println("b1 - b2 = " + b1_minus_b2);
-        System.out.println("b1 * b2 = " + b1_mal_b2);
-        System.out.println("b1 / b2 = " + b1_div_b2);
+        if (a.isEqual(b)) System.out.println("Juheeyy, die sind mal gleich!!");
+        if ( sindDieBeidenDoubleNahezuGleich(a.toDouble(), b.toDouble())
+            == a.isEqual(b) ) anzahlPositiverTests++;
 
-        Bruch b2_plus_b3 = b2.add(b3);
-        Bruch b2_minus_b3 = b2.sub(b3);
-        System.out.println("b2 + b3 = " + b2_plus_b3);
-        System.out.println("b2 - b3 = " + b2_minus_b3);
-
-        System.out.println( b1.isEqual(b4) ); // soll eigentlich b1 == b4 Äquivalenz
+        return anzahlPositiverTests;
     }
 }
