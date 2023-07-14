@@ -1,9 +1,16 @@
 public class Main {
+
+    public static boolean sindDieBeidenDoubleNahezuGleich(double a, double b) {
+        return Math.abs(a - b) < 0.0000001;
+    }
+
     public static void main(String[] args) {
         Bruch b1 = new Bruch(1, 2);
         Bruch b2 = new Bruch(1, 3);
         Bruch b3 = new Bruch(2, 3);
         Bruch b4 = new Bruch(7, 14);
+
+        //int x = (int)(Integer.MAX_VALUE * Math.random());
 
         System.out.println("b1 = " + b1);
         System.out.println("b2 = " + b2);
@@ -14,6 +21,7 @@ public class Main {
         Bruch b1_mal_b2 = b1.mult(b2);
         Bruch b1_div_b2 = b1.div(b2);
         System.out.println("b1 + b2 = " + b1_plus_b2);
+        System.out.println(sindDieBeidenDoubleNahezuGleich(b1.toDouble() + b2.toDouble(), b1_plus_b2.toDouble()));
         System.out.println("b1 - b2 = " + b1_minus_b2);
         System.out.println("b1 * b2 = " + b1_mal_b2);
         System.out.println("b1 / b2 = " + b1_div_b2);

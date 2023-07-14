@@ -68,4 +68,8 @@ public class Bruch {
     public String toString() {
         return zähler + "/" + nenner;
     }
+
+    public double toDouble() {
+        return (double) zähler / nenner;
+    }
 }
