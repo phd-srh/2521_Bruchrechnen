@@ -2,9 +2,18 @@ public class Bruch {
     private final long zähler;  // <- alle Attribute sind finale => immutable Klasse
     private final long nenner;
 
+    public Bruch() {
+        this(1, 1);
+    }
+
     public Bruch(long zähler, long nenner) {
         this.zähler = zähler;
         this.nenner = nenner;
+    }
+
+    public Bruch(double wert) {
+        // wert in zähler und nenner umformen
+        this(1,1); // <- FALSCH, nur damit IDE nicht meckert
     }
 
     // bruch_a .add( bruch_b ) => weil wir a + b, oder addiere(a, b)
